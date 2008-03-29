@@ -5,7 +5,7 @@ using KMLib.Abstract;
 
 namespace KMLib.Feature
 {
-    public class Document : AContainerFeature
+    public class Document : AContainer
     {
     }
 }

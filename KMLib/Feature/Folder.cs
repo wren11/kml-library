@@ -5,7 +5,7 @@ using KMLib.Abstract;
 
 namespace KMLib.Feature
 {
-    public class Folder : AContainerFeature
+    public class Folder : AContainer
     {
         public Folder() { }
         public Folder(string t) {

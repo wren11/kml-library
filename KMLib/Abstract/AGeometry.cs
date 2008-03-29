@@ -38,7 +38,10 @@ namespace KMLib.Abstract
             }
             set {
                 m_altitudeMode = value;
+                AltitudeModeSpecified = true;
             }
         }
+        [XmlIgnore()]
+        public bool AltitudeModeSpecified = false;
     }
 }

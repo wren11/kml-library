@@ -27,9 +27,9 @@ namespace KMLib.Feature
             }
         }
 
-        public Point Point {
+        public KmlPoint Point {
             get {
-                return m_Geometry as Point;
+                return m_Geometry as KmlPoint;
             }
             set {
                 m_Geometry = value;
@@ -86,7 +86,7 @@ namespace KMLib.Feature
             get {
                 if (m_Geometry == null) {
                     return GeometryType.Empty;
-                } else if (m_Geometry is Point) {
+                } else if (m_Geometry is KmlPoint) {
                     return GeometryType.Point;
                 } else if (m_Geometry is LinearRing) {
                     return GeometryType.LinearRing;
