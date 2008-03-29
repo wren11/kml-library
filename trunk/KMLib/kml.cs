@@ -12,7 +12,7 @@ namespace KMLib
     //[XmlRoot(ElementName = "kml", Namespace = "http://earth.google.com/kml/2.1")]
     //--if you add the namespace, then all children get a blank namespace attrib...
     [XmlRoot(ElementName = "kml")]
-    public class KMLRoot : AContainer
+    public class KMLRoot
     {
         public static bool deserializing;
         public static KMLRoot Load(string path) {
@@ -36,14 +36,14 @@ namespace KMLib
         [XmlIgnore()]
         public bool UsesDocument {
             get {
-                return (m_List == null || m_List.Count == 0);
+                return m_Feature == null;
             }
         }
 
         public Document Document {
             get {
                 if (!serializing && m_Document == null) {
-                    if (List != null) {
+                    if (m_Feature != null) {
                         throw new Exception("Cannot use a Document and other features at the root level. If you have more than 1 feature, add all features to the Document (not the root).");
                     }
                     m_Document = new Document();                    
@@ -55,13 +55,22 @@ namespace KMLib
             }
         }
 
-        public void SetFeature(AFeature feature) {
-            if (m_Document != null) {
-                throw new Exception("Cannot set features at the root level if a Document node is already defined.");
+        private AFeature m_Feature;
+        [XmlElement(ElementName = "Folder", Type = typeof(Folder))]
+        [XmlElement(ElementName = "Placemark", Type = typeof(Placemark))]
+        [XmlElement(ElementName = "NetworkLink", Type = typeof(NetworkLink))]
+        [XmlElement(ElementName = "GroundOverlay", Type = typeof(GroundOverlay))]
+        [XmlElement(ElementName = "ScreenOverlay", Type = typeof(ScreenOverlay))]
+        public AFeature Feature {
+            get {
+                return m_Feature;
             }
-            //--this is a bit weird, but kml docs can contain only one root element (it can be a Document or any Feature)
-            m_List = new List<AFeature>();
-            m_List.Add(feature);
-        }
+            set {
+                if (m_Document != null) {
+                    throw new Exception("Cannot set features at the root level if a Document node is already defined.");
+                }
+                m_Feature = value;
+            }
+        }        
     }
 }

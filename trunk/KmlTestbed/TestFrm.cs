@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using KMLib;
 using KMLib.Feature;
 using Core.FileHandling;
+using KMLib.Geometry;
 
 namespace KmlTestbed
 {
@@ -26,15 +27,34 @@ namespace KmlTestbed
             }
         }
 
+        private void button3_Click(object sender, EventArgs e) {
+            KMLRoot kml = CreateKmlFeat();
+            LoadSave ls = new LoadSave("kml");
+            string fpath = ls.GetSavePath();
+            if (fpath != null) {
+                kml.Save(fpath);
+            }
+        }
+
         private KMLRoot CreateKmlDoc() {
             KMLRoot kml = new KMLRoot();
             Placemark pm = new Placemark();
             pm.name = "foo";
+            pm.Point = new KmlPoint(120, 45, 50);
             pm.Snippet = "foo is cool";
             pm.Snippet.maxLines = 1;
-            
 
+            Folder fldr = new Folder("Test Folder");
 
+            kml.Document.Add(pm);
+            kml.Document.Add(new Placemark());
+            kml.Document.Add(fldr);
+
+            return kml;
+        }
+
+        private KMLRoot CreateKmlFeat() {
+            KMLRoot kml = new KMLRoot();
             Folder fldr = new Folder("Test Folder");
             fldr.Add(new Folder("Sub Folder"));
 
@@ -45,12 +65,12 @@ namespace KmlTestbed
             g.description = "Cool overlay";
 
             fldr.Add(g);
+            kml.Feature = fldr;
 
-            kml.Document.Add(fldr);
-            kml.Document.Add(pm);
-            kml.Document.Add(new Placemark());
             return kml;
         }
+
+
 
         private void button2_Click(object sender, EventArgs e) {
             LoadSave ls = new LoadSave("kml");
@@ -60,10 +80,12 @@ namespace KmlTestbed
                 if (kml.UsesDocument) {
                     MessageBox.Show("Loaded kml (doc): " + kml.Document.List.Count);
                 } else {
-                    MessageBox.Show("Loaded kml: " + kml.List.Count);
+                    MessageBox.Show("Loaded kml (feature): " + kml.Feature.name);
                 }
             }
-            
+
         }
+
+
     }
 }
