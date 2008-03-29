@@ -7,7 +7,7 @@ using System.Xml;
 using KMLib.Abstract;
 using KMLib.Geometry;
 
-namespace KMLib
+namespace KMLib.Feature
 {
     public enum GeometryType
     {

@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace KMLib.Abstract
 {
-    public class AOverlay : AFeature
+    public abstract class AOverlay : AFeature
     {
         private ColorKML m_color;
         public ColorKML color {

@@ -4,7 +4,7 @@ using System.Text;
 using KMLib.Abstract;
 using Core.Xml;
 
-namespace KMLib
+namespace KMLib.Feature
 {
     public class NetworkLink : AFeature
    {
