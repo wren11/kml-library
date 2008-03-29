@@ -5,7 +5,7 @@ using Core.Xml;
 using KMLib.Abstract;
 using System.Xml.Serialization;
 
-namespace KMLib
+namespace KMLib.Feature
 {
     public class GroundOverlay : AOverlay
     {

@@ -77,10 +77,4 @@ namespace KMLib
             }
         }
     }
-
-    //--Document extends Container which extends Feature.     
-    //--It needs to behave as a list as well as having its own properties (from AFeature)
-    public class Document : XmlList<AObject>
-    {
-    }
 }
