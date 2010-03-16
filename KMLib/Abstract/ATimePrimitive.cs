@@ -4,7 +4,7 @@ using System.Text;
 
 namespace KMLib.Abstract
 {
-    class ATimePrimitive
+    public abstract class ATimePrimitive : AObject
     {
     }
 }
