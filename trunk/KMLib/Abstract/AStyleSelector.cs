@@ -4,7 +4,7 @@ using System.Text;
 
 namespace KMLib.Abstract
 {
-    class AStyleSelector
+    public abstract class AStyleSelector : AObject
     {
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Core.Xml;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace KMLib.Abstract
@@ -110,6 +111,65 @@ namespace KMLib.Abstract
                 m_Metadata = value;
             }
         }
+
+        private TimeStamp m_TimeStamp;
+        [XmlElement("TimeStamp")]
+        public TimeStamp TimeStamp
+        {
+            get
+            {
+                return m_TimeStamp;
+            }
+            set
+            {
+                m_TimeStamp = value;
+                TimeStampSpecified = true;
+            }
+        }
+        [XmlIgnore()]
+        private bool TimeStampSpecified = false;
+
+        private TimeSpan m_TimeSpan;
+        [XmlElement("TimeSpan")]
+        public TimeSpan TimeSpan
+        {
+            get
+            {
+                return m_TimeSpan;
+            }
+            set
+            {
+                m_TimeSpan = value;
+                TimeSpanSpecified = true;
+            }
+        }
+        [XmlIgnore()]
+        private bool TimeSpanSpecified = false;
+
+        public void AddStyle(Style style)
+        {
+            if (m_Style == null)
+            {
+                m_Style = new List<Style>();
+            }
+            m_Style.Add(style);
+        }
+
+        private List<Style> m_Style;
+        [XmlElement(ElementName = "Style", Type = typeof(Style))]
+        public List<Style> Lists
+        {
+            get
+            {
+                return m_Style;
+            }
+            set
+            {
+                m_Style = value;
+            }
+        }
+        [XmlIgnore()]
+        private bool StyleSpecified = false;
     }    
 }
 
